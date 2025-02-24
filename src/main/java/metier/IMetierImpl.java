@@ -4,7 +4,14 @@ import dao.IDao;
 import dao.IDaoImpl;
 
 public class IMetierImpl implements IMetier {
-    IDao iDao; //Couplage faible = dependence d'une interface
+    IDao iDao = null; //Couplage faible = dependence d'une interface
+
+    public IMetierImpl() {
+    }
+
+    public IMetierImpl(IDao iDao) {
+        this.iDao = iDao;
+    }
 
     @Override
     public double calcul() {
