@@ -10,7 +10,7 @@ public class MainV1 {
         // Injection des dependance par instantiation statique
 
         IDao iDao = new IDaoImplv2();
-        IMetierImpl metier = new IMetierImpl(iDao);
+        IMetierImpl metier = new IMetierImpl(iDao);//Injection via Constructeur
 //        metier.setiDao(iDao); //Injection via Setter
         System.out.println(metier.calcul());
     }
