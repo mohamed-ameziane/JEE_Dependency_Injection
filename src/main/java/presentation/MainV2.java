@@ -1,7 +1,9 @@
 package presentation;
 
+import dao.IDao;
+import metier.IMetier;
+
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class MainV2 {
@@ -9,10 +11,17 @@ public class MainV2 {
         try {
             Scanner sc = new Scanner(new File("config.txt"));
             String daoClassName = sc.nextLine();
-            System.out.println(daoClassName);
 
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());;
+            Class cDao = Class.forName(daoClassName);
+            IDao dao = (IDao) cDao.getDeclaredConstructor().newInstance();
+
+            String metierClassName = sc.nextLine();
+            Class cMetier = Class.forName(metierClassName);
+            IMetier metier = (IMetier) cMetier.getConstructor(IDao.class).newInstance(dao);
+
+            System.out.println(metier.calcul());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }
